@@ -4,23 +4,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import books.Book;
 import exception.NotFoundException;
 import interfaces.GetBookByNameInterface;
 import manager.Manager;
+import readingMaterial.Book;
+import readingMaterial.ReadingMaterial;
 
 public class Store implements GetBookByNameInterface{
 	
 	private String name;
-	private List<Book> books;
-	private List<Book> rentedBooks;
+	private List<ReadingMaterial> readingMaterial;
+	private List<ReadingMaterial> rentedMaterial;
 	private Manager manager;
 
 	public Store(Manager manager, String name) {
 		this.name = name;
 		this.manager = manager;
-		this.books = new ArrayList<Book>();
-		this.rentedBooks = new ArrayList<Book>();	
+		this.readingMaterial = new ArrayList<ReadingMaterial>();
+		this.rentedMaterial = new ArrayList<ReadingMaterial>();	
 	}
 
 	public String getName() {
@@ -31,12 +32,12 @@ public class Store implements GetBookByNameInterface{
 		this.name = name;
 	}
 
-	public List<Book> getBooks() {
-		return books;
+	public List<ReadingMaterial> getBooks() {
+		return readingMaterial;
 	}
 
-	public void setBooks(List<Book> books) {
-		this.books = books;
+	public void setBooks(List<ReadingMaterial> books) {
+		this.readingMaterial = books;
 	}
 
 	public Manager getManager() {
@@ -47,53 +48,53 @@ public class Store implements GetBookByNameInterface{
 		this.manager = manager;
 	}
 
-	public List<Book> getRentedBooks() {
-		return rentedBooks;
+	public List<ReadingMaterial> getRentedBooks() {
+		return rentedMaterial;
 	}
 
-	public void setRentedBooks(List<Book> rentedBooks) {
-		this.rentedBooks = rentedBooks;
+	public void setRentedBooks(List<ReadingMaterial> rentedBooks) {
+		this.rentedMaterial = rentedBooks;
 	}
 
-	public void addBook(Book newBook) {
-		books.add(newBook);
+	public void addBook(ReadingMaterial newBook) {
+		readingMaterial.add(newBook);
 	}
 
-	public int getStock(String bookName) {
+	public int getStock(String readingName) {
 		int aux = 0;
-		for (Book book : books) {
-			if (book.getName() == bookName)
+		for (ReadingMaterial readingObject : readingMaterial) {
+			if (readingObject.getName() == readingName)
 				aux++;
 		}
 		return aux;
 	}
 
-	public Book getBookByName(String bookName) throws NotFoundException {
-		for (Book book : books) {
-			if (book.getName() == bookName)
-				return book;
+	public ReadingMaterial getBookByName(String bookName) throws NotFoundException {
+		for (ReadingMaterial readingObject : readingMaterial) {
+			if (readingObject.getName() == bookName)
+				return readingObject;
 		}
 		throw new NotFoundException("Book not found");
 	}
 
-	public Book rentBook(String bookName) throws NotFoundException {
-		Book rentedBook = getBookByName(bookName);
-		books.remove(rentedBook);
-		rentedBooks.add(rentedBook);
+	public ReadingMaterial rentBook(String bookName) throws NotFoundException {
+		ReadingMaterial rentedBook = getBookByName(bookName);
+		readingMaterial.remove(rentedBook);
+		rentedMaterial.add(rentedBook);
 		return rentedBook;
 	}
 
-	public Boolean returnBook(Book returnedBook) {
-		if(rentedBooks.contains(returnedBook)) {
-			rentedBooks.remove(returnedBook);
-			books.add(returnedBook);
+	public Boolean returnBook(ReadingMaterial returnedBook) {
+		if(rentedMaterial.contains(returnedBook)) {
+			rentedMaterial.remove(returnedBook);
+			readingMaterial.add(returnedBook);
 			return true;
 		} else {
 			return false;
 		}
 	}
-	public void removeOldBooks() {
-		Iterator<Book> itBooks = books.iterator();
+	public void removeOldMaterial() {
+		Iterator<ReadingMaterial> itBooks = readingMaterial.iterator();
 			while(itBooks.hasNext()) {
 				int quality= itBooks.next().getQuality();
 				if(quality <= 0) {

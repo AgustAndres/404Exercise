@@ -1,8 +1,9 @@
 package interfaces;
 
-import books.Book;
 import exception.NotFoundException;
+import readingMaterial.Book;
+import readingMaterial.ReadingMaterial;
 
 public interface GetBookByNameInterface {
-	abstract Book getBookByName(String bookName) throws NotFoundException;
+	abstract ReadingMaterial getBookByName(String bookName) throws NotFoundException;
 }

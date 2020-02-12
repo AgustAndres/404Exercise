@@ -2,19 +2,20 @@ package customer;
 
 import java.util.ArrayList;
 
-import books.Book;
 import exception.NotFoundException;
 import interfaces.GetBookByNameInterface;
+import readingMaterial.Book;
+import readingMaterial.ReadingMaterial;
 import store.Store;
 
 public class Customer implements GetBookByNameInterface{
 
 	private String name;
-	private ArrayList<Book> rentedBooks;
+	private ArrayList<ReadingMaterial> rentedBooks;
 
 	public Customer(String name) {
 		this.name=name;
-		rentedBooks = new ArrayList<Book>();
+		rentedBooks = new ArrayList<ReadingMaterial>();
 	}
 
 	public String getName() {
@@ -25,11 +26,11 @@ public class Customer implements GetBookByNameInterface{
 		this.name = name;
 	}
 
-	public ArrayList<Book> getRentedBooks() {
+	public ArrayList<ReadingMaterial> getRentedBooks() {
 		return rentedBooks;
 	}
 
-	public void setRentedBooks(ArrayList<Book> rentedBooks) {
+	public void setRentedBooks(ArrayList<ReadingMaterial> rentedBooks) {
 		this.rentedBooks = rentedBooks;
 	}
 
@@ -41,8 +42,8 @@ public class Customer implements GetBookByNameInterface{
 		}
 	}
 	
-	public Book getBookByName(String bookName) throws NotFoundException {
-		for (Book book : rentedBooks) {
+	public ReadingMaterial getBookByName(String bookName) throws NotFoundException {
+		for (ReadingMaterial book : rentedBooks) {
 			if (book.getName() == bookName)
 				return book;
 		}
@@ -51,7 +52,7 @@ public class Customer implements GetBookByNameInterface{
 
 	public Boolean returnBook(Store store, String bookName) {
 		try {
-			Book returnedBook = getBookByName(bookName);
+			ReadingMaterial returnedBook = getBookByName(bookName);
 			if(store.returnBook(returnedBook));{
 				rentedBooks.remove(returnedBook);
 				return true;

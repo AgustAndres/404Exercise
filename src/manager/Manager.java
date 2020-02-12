@@ -1,6 +1,7 @@
 package manager;
 
-import books.Book;
+import readingMaterial.Book;
+import readingMaterial.ReadingMaterial;
 import store.Store;
 
 public class Manager {
@@ -20,7 +21,7 @@ public class Manager {
 	public void buyBooks(Store store, String bookName, int quantity, int quality) {
 		for (int i = 0; i < quantity; i++) {
 			Book newBook = new Book(bookName, quality);
-			store.addBook(newBook);
+			store.addBook((ReadingMaterial)newBook);
 		}
 	}
 }

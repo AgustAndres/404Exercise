@@ -4,9 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Assert;
 
-import books.Book;
 import customer.Customer;
 import manager.Manager;
+import readingMaterial.Book;
+import readingMaterial.Comic;
 import store.Store;
 
 public class Test {
@@ -53,8 +54,8 @@ public class Test {
 
 	@org.junit.Test
 	public void thirdIteration() {
-		System.out.println("Thrid iteration");
-		Book newBook = new Book("Pedro", 5);
+		System.out.println("Third iteration");
+		Book newBook = new Book("Rayuela", 5);
 		newBook.getTimeLeft();
 		
 		Manager manager = new Manager("Peter");
@@ -63,8 +64,20 @@ public class Test {
 		manager.buyBooks(store, "Rayuela", 4, 0);
 		Assert.assertEquals(4, store.getStock("Rayuela"));
 		
-		store.removeOldBooks();
+		store.removeOldMaterial();
 		
 		Assert.assertEquals(0, store.getStock("Rayuela"));
+	}
+	
+	@org.junit.Test
+	public void fourthIteration() {
+		System.out.println("Fourth iteration");
+		Book newBook = new Book("Angel", 6);
+		newBook.getTimeLeft();
+		
+		Comic newComic = new Comic("Robin", 6);
+		newComic.getTimeLeft(); 
+		
+		Assert.assertNotEquals(newBook.getQuality(), newComic.getQuality());
 	}
 }
