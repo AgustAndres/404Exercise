@@ -8,6 +8,7 @@ import exception.NotFoundException;
 import interfaces.GetBookByNameInterface;
 import manager.Manager;
 import readingMaterial.Book;
+import readingMaterial.CollectorEdition;
 import readingMaterial.ReadingMaterial;
 
 public class Store implements GetBookByNameInterface{
@@ -56,7 +57,7 @@ public class Store implements GetBookByNameInterface{
 		this.rentedMaterial = rentedBooks;
 	}
 
-	public void addBook(ReadingMaterial newBook) {
+	public void addReadingMaterial(ReadingMaterial newBook) {
 		readingMaterial.add(newBook);
 	}
 
@@ -96,10 +97,16 @@ public class Store implements GetBookByNameInterface{
 	public void removeOldMaterial() {
 		Iterator<ReadingMaterial> itBooks = readingMaterial.iterator();
 			while(itBooks.hasNext()) {
+				ReadingMaterial material = itBooks.next();
+				if(!(material instanceof CollectorEdition) && material.getQuality()<=0){
+					itBooks.remove();
+				}
+
+				/*
 				int quality= itBooks.next().getQuality();
 				if(quality <= 0) {
 					itBooks.remove();
-				}
+				}*/
 			}
 	}
 }

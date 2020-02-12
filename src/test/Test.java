@@ -7,6 +7,7 @@ import org.junit.Assert;
 import customer.Customer;
 import manager.Manager;
 import readingMaterial.Book;
+import readingMaterial.CollectorEdition;
 import readingMaterial.Comic;
 import store.Store;
 
@@ -67,6 +68,7 @@ public class Test {
 		store.removeOldMaterial();
 		
 		Assert.assertEquals(0, store.getStock("Rayuela"));
+		System.out.println();
 	}
 	
 	@org.junit.Test
@@ -79,5 +81,31 @@ public class Test {
 		newComic.getTimeLeft(); 
 		
 		Assert.assertNotEquals(newBook.getQuality(), newComic.getQuality());
+		System.out.println();
+	}
+	
+	@org.junit.Test
+	public void fifthIteration() {
+		System.out.println("Fifth iteration");
+		//Uso otro constructor que tiene una fecha fija, para demostrar que suma su calidad por dia
+		CollectorEdition newCollectorEdition = new CollectorEdition("Deadlock", "test");
+		Assert.assertTrue(newCollectorEdition.getQuality()>0);
+		System.out.println("Quality: "+newCollectorEdition.getQuality());
+		
+		System.out.println();
+		
+		Manager manager = new Manager("Peter");
+		Store store = new Store(manager, "BookToHome");
+		
+		CollectorEdition newCollectorEdition2 = new CollectorEdition("Deadlock");
+		Assert.assertTrue(newCollectorEdition2.getQuality()==0);
+		System.out.println("Quality: "+newCollectorEdition2.getQuality());
+		
+		manager.buyCollectorEdition(store, "Rayuela", 4);
+		Assert.assertEquals(4, store.getStock("Rayuela"));
+		store.removeOldMaterial();
+		Assert.assertEquals(4, store.getStock("Rayuela"));
+		
+		System.out.println();
 	}
 }
