@@ -17,9 +17,9 @@ public class Manager {
 		this.name = name;
 	}
 
-	public void buyBooks(Store store, String bookName, int quantity) {
+	public void buyBooks(Store store, String bookName, int quantity, int quality) {
 		for (int i = 0; i < quantity; i++) {
-			Book newBook = new Book(bookName);
+			Book newBook = new Book(bookName, quality);
 			store.addBook(newBook);
 		}
 	}

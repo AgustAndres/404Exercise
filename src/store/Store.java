@@ -1,6 +1,7 @@
 package store;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import books.Book;
@@ -9,7 +10,7 @@ import interfaces.GetBookByNameInterface;
 import manager.Manager;
 
 public class Store implements GetBookByNameInterface{
-
+	
 	private String name;
 	private List<Book> books;
 	private List<Book> rentedBooks;
@@ -19,7 +20,7 @@ public class Store implements GetBookByNameInterface{
 		this.name = name;
 		this.manager = manager;
 		this.books = new ArrayList<Book>();
-		this.rentedBooks = new ArrayList<Book>();
+		this.rentedBooks = new ArrayList<Book>();	
 	}
 
 	public String getName() {
@@ -91,5 +92,13 @@ public class Store implements GetBookByNameInterface{
 			return false;
 		}
 	}
-
+	public void removeOldBooks() {
+		Iterator<Book> itBooks = books.iterator();
+			while(itBooks.hasNext()) {
+				int quality= itBooks.next().getQuality();
+				if(quality <= 0) {
+					itBooks.remove();
+				}
+			}
+	}
 }
