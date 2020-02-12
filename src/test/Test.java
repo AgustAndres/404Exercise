@@ -108,4 +108,19 @@ public class Test {
 		
 		System.out.println();
 	}
+	
+	@org.junit.Test
+	public void sixthIteration() {
+		System.out.println("Sixth iteration");
+		Manager manager = new Manager("Peter");
+		Store store = new Store(manager, "BookToHome");
+		
+		manager.buyBooks(store, "Rayuela", 2, 10);
+		manager.buyBooks(store, "El Tunel", 2, 10);
+		manager.buyBooks(store, "El Aleph", 10, 10);
+		manager.minimumStock(store);
+		
+		
+		System.out.println();
+	}
 }

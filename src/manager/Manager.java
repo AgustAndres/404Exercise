@@ -39,4 +39,22 @@ public class Manager {
 			store.addReadingMaterial((ReadingMaterial)newCollectorEdition);
 		}
 	}
+	
+	public void minimumStock(Store store) {
+		int r = 0;
+		int t = 0;
+		int a = 0;
+		for (ReadingMaterial stock : store.getBooks()) {
+			if(stock.getName()=="Rayuela") {
+				r +=1;
+			} else if(stock.getName()=="El Tunel") {
+				t +=1;
+			} else if(stock.getName()=="El Aleph") {
+				a +=1;
+			}
+		}
+		if(r<4)System.out.println(4-r + " units of \"Rayuela\" needed to have minimun stock");
+		if(t<4)System.out.println(3-t + " units of \"El Tunel\" needed to have minimun stock");
+		if(a<4)System.out.println(2-a + " units of \"El Aleph\" needed to have minimun stock");
+	}
 }
